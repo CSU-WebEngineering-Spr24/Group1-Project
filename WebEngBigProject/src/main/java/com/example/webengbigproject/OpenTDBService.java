@@ -10,51 +10,48 @@ import java.time.format.DateTimeFormatter;
 // This service annotation is important; otherwise SpringBoot will not know that this needs
 // to be autowired into your main app.
 @Service
-public class APODService
+public class OpenTDBService
 {
     // API key from https://api.nasa.gov/
     private static final String API_KEY = "Eshc6SGaERpVafvFE71XDMWAVTzecUzPLjgY9IGG";
-    private static final String BASE_URL = "https://api.nasa.gov/planetary/apod";
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final String BASE_URL = "https://opentdb.com/api.php?";
 
     private final RestTemplate restTemplate;
 
-    public APODService(RestTemplateBuilder builder)
+    public OpenTDBService(RestTemplateBuilder builder)
     {
         // In-built springboot builder for REST
         this.restTemplate = builder.build();
     }
 
 
-    // Default, picture of the day
-    public OpenTriviaDBResponse getAPODObject()
+    // Default: Get one question randomly in any category
+    public OpenTriviaDBResponse getOpenTDBObject()
     {
-        String url = BASE_URL + "?api_key=" + API_KEY;
+        String url = BASE_URL;
         // Auto-gets the response object, just need to give it annotated class.
         return restTemplate.getForObject(url, OpenTriviaDBResponse.class);
     }
 
-    public OpenTriviaDBResponse getAPODObject(LocalDate date)
+    /**
+     *
+     * @param amount The amount of questions requested
+     * @return JSON response object containing the question(s) and answers
+     */
+    public OpenTriviaDBResponse[] getOpenTDBObject(int amount)
     {
-        String url = BASE_URL + "?api_key=" + API_KEY + "&date=" + date.format(DATE_FORMAT);
-        return restTemplate.getForObject(url, OpenTriviaDBResponse.class);
-    }
-
-    public OpenTriviaDBResponse[] getAPODObject(int count)
-    {
-        String url = BASE_URL + "?api_key=" + API_KEY + "&count=" + count;
+        if (amount < 1) amount = 1;
+        String url = BASE_URL + "&amount=" + amount;
         return restTemplate.getForObject(url, OpenTriviaDBResponse[].class);
     }
 
 
-    public OpenTriviaDBResponse[] getAPODObject(String start_date, String end_date )
+    public OpenTriviaDBResponse[] getOpenTDBObject(String start_date, String end_date )
     {
-        String url = BASE_URL + "?api_key=" + API_KEY + "&start_date=" + start_date+
+        String url = BASE_URL + "&start_date=" + start_date+
                 "&end_date=" + end_date;
         return restTemplate.getForObject(url, OpenTriviaDBResponse[].class);
     }
 
-
-    //&start_date=2024-01-01&end_date=2024-02-01
 
 }

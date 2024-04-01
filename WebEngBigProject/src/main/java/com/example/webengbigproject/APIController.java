@@ -11,7 +11,7 @@ import java.time.LocalDate;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*") // Allow all? (at least gets rid of CORS)
-public class UpdatedController
+public class APIController
 {
     private APODService _apodService = null;
 

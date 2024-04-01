@@ -1,63 +1,69 @@
 package com.example.webengbigproject;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+    @author Himanshu Bohra
+    This class contains the json response for OpenTDB API query.
+    Example: https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple&encode=url3986
+ */
 public class OpenTriviaDBResponse
 {
-    @JsonProperty("date")
-    private String date;
+    @JsonProperty("type")
+    private String type;
 
-    @JsonProperty("explanation")
-    private String explanation;
+    @JsonProperty("difficulty")
+    private String difficulty;
 
-    @JsonProperty("hdurl")
-    private String hdurl;
+    @JsonProperty("category")
+    private String category;
 
-    @JsonProperty("media_type")
-    private String mediaType;
+    @JsonProperty("question")
+    private String question;
 
-    @JsonProperty("service_version")
-    private String serviceVersion;
+    @JsonProperty("correct_answer")
+    private String correctAnswer;
 
-    @JsonProperty("title")
-    private String title;
+    @JsonProperty("incorrect_answers")
+    private ArrayList<String> incorrectAnswers;
 
-    @JsonProperty("url")
-    private String url;
+    @JsonProperty("response_code")
+    private String responseCode;
 
 
     // Getters and setters
     public String getDate()
     {
-        return date;
+        return type;
     }
 
-    public String getExplanation()
+    public String getdifficulty()
     {
-        return explanation;
+        return difficulty;
     }
 
-    public String getHdurl()
+    public String getCategory()
     {
-        return hdurl;
+        return category;
     }
 
-    public String getMediaType()
+    public String getQuestion()
     {
-        return mediaType;
+        return question;
     }
 
-    public String getServiceVersion()
+    public String getCorrectAnswer()
     {
-        return serviceVersion;
+        return correctAnswer;
     }
 
-    public String getTitle()
+    public String getIncorrectAnswers()
     {
-        return title;
+        return incorrectAnswers;
     }
 
-    public String getUrl()
+    public String responseCode()
     {
-        return url;
+        return responseCode;
     }
 
 }
