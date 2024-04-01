@@ -1,0 +1,61 @@
+.
+├── projectrStructure.txt
+├── react_appln
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   └── src
+│       ├── App.css
+│       ├── App.js
+│       ├── App.test.js
+│       ├── AppUsage.js
+│       ├── FormPage.js
+│       ├── Home.js
+│       ├── index.css
+│       ├── index.js
+│       ├── logo.svg
+│       ├── reportWebVitals.js
+│       ├── setupTests.js
+│       └── SIdebar.js
+├── README.md
+└── WebEngBigProject
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── pom.xml
+    ├── src
+    │   ├── main
+    │   │   ├── java
+    │   │   │   └── com
+    │   │   │       └── example
+    │   │   │           └── webengbigproject
+    │   │   │               ├── APODService.java
+    │   │   │               ├── HomeController.java
+    │   │   │               ├── OpenTriviaDBResponse.java
+    │   │   │               ├── UpdatedController.java
+    │   │   │               └── WebEngBigProjectApplication.java
+    │   │   └── resources
+    │   │       └── application.properties
+    │   └── test
+    │       └── java
+    │           └── com
+    │               └── example
+    │                   └── webengbigproject
+    │                       └── WebEngBigProjectApplicationTests.java
+    └── target
+        ├── classes
+        │   ├── application.properties
+        │   └── com
+        │       └── example
+        │           └── webengbigproject
+        │               ├── APODService.class
+        │               ├── HomeController.class
+        │               ├── OpenTriviaDBResponse.class
+        │               ├── UpdatedController.class
+        │               └── WebEngBigProjectApplication.class
+        └── test-classes
+            └── com
+                └── example
+                    └── webengbigproject
+                        └── WebEngBigProjectApplicationTests.class
+
+24 directories, 34 files
