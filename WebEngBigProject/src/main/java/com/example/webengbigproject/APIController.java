@@ -7,43 +7,43 @@ import java.time.LocalDate;
 
 /*
     TODO: Refactor this code for open trivia DB API (TASK 1 for backend)
+    LATER: There will be a random generator class which will fetch from random API.
  */
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*") // Allow all? (at least gets rid of CORS)
 public class APIController
 {
-    private APODService _apodService = null;
+    private OpenTDBService _openTDBService = null;
 
-    public UpdatedController(APODService apodService)
+    public APIController(OpenTDBService apodService)
     {
-        this._apodService = apodService;
+        this._openTDBService = apodService;
     }
 
 
-    @GetMapping("/apod")
-    public OpenTriviaDBResponse getApod()
+
+    @GetMapping("/getDefault")
+    public OpenTriviaDBResponse getQuestion()
     {
-        return _apodService.getAPODObject();
+        return _openTDBService.getOpenTDBObject();
     }
 
-    @GetMapping("/apod/getByDate/{date}")
-    public OpenTriviaDBResponse getApod(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date)
+
+    @GetMapping("/getByAmount")
+    public OpenTriviaDBResponse getQuestion(@RequestParam(value = "amount", required = false) Integer amount)
     {
-        return _apodService.getAPODObject(date);
+        return _openTDBService.getOpenTDBObject(amount);
     }
 
-    @GetMapping("/apod/getByDate")
-    public OpenTriviaDBResponse[] getApod(@RequestParam(value = "start_date", required = false) String start_date,
-                                          @RequestParam(value = "end_date", required = false) String end_date)
-    {
-        return _apodService.getAPODObject(start_date,end_date);
-    }
 
-    @GetMapping("/apod/getByCount/{count}")
-    public OpenTriviaDBResponse[] getApod(@PathVariable String count)
+
+    @GetMapping("/get")
+    public OpenTriviaDBResponse getQuestion(@RequestParam(value = "amount", required = false, defaultValue = "1") Integer amount,
+                                          @RequestParam(value = "difficulty", required = false, defaultValue = "easy") String difficulty,
+                                              @RequestParam(value = "type", required = false, defaultValue = "multiple") String type)
     {
-        return _apodService.getAPODObject(Integer.parseInt(count));
+        return _openTDBService.getOpenTDBObject(amount, difficulty, type);
     }
 
 

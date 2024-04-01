@@ -1,6 +1,8 @@
 package com.example.webengbigproject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+
 /**
     @author Himanshu Bohra
     This class contains the json response for OpenTDB API query.
@@ -8,62 +10,25 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class OpenTriviaDBResponse
 {
-    @JsonProperty("type")
-    private String type;
-
-    @JsonProperty("difficulty")
-    private String difficulty;
-
-    @JsonProperty("category")
-    private String category;
-
-    @JsonProperty("question")
-    private String question;
-
-    @JsonProperty("correct_answer")
-    private String correctAnswer;
-
-    @JsonProperty("incorrect_answers")
-    private ArrayList<String> incorrectAnswers;
+    // TODO: FIX ALL THIS! There is also a response code, not just results
+    // Making a temporary fix before refactoring
+    @JsonProperty("results")
+    private ArrayList<OpenTriviaDBQuestion> _results;
 
     @JsonProperty("response_code")
-    private String responseCode;
+    private String _responseCode;
 
 
-    // Getters and setters
-    public String getDate()
+
+    // Getters
+    public ArrayList<OpenTriviaDBQuestion> getResults()
     {
-        return type;
-    }
-
-    public String getdifficulty()
-    {
-        return difficulty;
-    }
-
-    public String getCategory()
-    {
-        return category;
-    }
-
-    public String getQuestion()
-    {
-        return question;
-    }
-
-    public String getCorrectAnswer()
-    {
-        return correctAnswer;
-    }
-
-    public String getIncorrectAnswers()
-    {
-        return incorrectAnswers;
+        return _results;
     }
 
     public String responseCode()
     {
-        return responseCode;
+        return _responseCode;
     }
 
 }
