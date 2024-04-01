@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Home';
 import FormPage from './FormPage';
 import AppUsagePage from './AppUsage';
+import Quiz from './Quiz';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "usage",
         element: <AppUsagePage />,
+      },
+      {
+        path: "quiz",
+        element: <Quiz />,
       },
     ],
   }
