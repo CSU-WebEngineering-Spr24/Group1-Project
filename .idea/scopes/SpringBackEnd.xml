@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="SpringBackEnd" pattern="file[Group1-Project]:WebEngBigProject//*&amp;&amp;!file[Group1-Project]:react_appln//*" />
+</component>
