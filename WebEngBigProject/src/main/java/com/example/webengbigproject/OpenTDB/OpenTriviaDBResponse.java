@@ -1,4 +1,5 @@
-package com.example.webengbigproject;
+package com.example.webengbigproject.OpenTDB;
+import com.example.webengbigproject.OpenTDB.OpenTriviaDBQuestion;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import java.util.ArrayList;
  */
 public class OpenTriviaDBResponse
 {
-    // TODO: FIX ALL THIS! There is also a response code, not just results
     // Making a temporary fix before refactoring
     @JsonProperty("results")
     private ArrayList<OpenTriviaDBQuestion> _results;
@@ -26,7 +26,7 @@ public class OpenTriviaDBResponse
         return _results;
     }
 
-    public String responseCode()
+    public String getResponseCode()
     {
         return _responseCode;
     }

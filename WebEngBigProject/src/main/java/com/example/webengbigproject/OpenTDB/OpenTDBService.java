@@ -1,11 +1,8 @@
-package com.example.webengbigproject;
+package com.example.webengbigproject.OpenTDB;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 // This service annotation is important; otherwise SpringBoot will not know that this needs
 // to be autowired into your main app.
@@ -32,6 +29,7 @@ public class OpenTDBService
 
 
     /**
+     * This function should not be used, temporary test function.
      * @return Returns a medium difficulty, multi-choice question from any category.
      */
     public OpenTriviaDBResponse getOpenTDBObject()
@@ -42,6 +40,7 @@ public class OpenTDBService
     }
 
     /**
+     * This function should not be used. Temporary test function.
      * @param amount The amount of questions requested
      * @return JSON response object containing the question(s) and answers (med,multi-choice)
      */

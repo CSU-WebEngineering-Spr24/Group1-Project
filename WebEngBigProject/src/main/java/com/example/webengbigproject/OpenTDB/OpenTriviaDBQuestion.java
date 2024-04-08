@@ -1,4 +1,4 @@
-package com.example.webengbigproject;
+package com.example.webengbigproject.OpenTDB;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
