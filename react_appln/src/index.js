@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Home';
-import FormPage from './FormPage';
-import AppUsagePage from './AppUsage';
-import Quiz from './Quiz';
+import Home from './Pages/Home';
+import FormPage from './Pages/FormPage';
+import AppUsagePage from './Pages/AppUsage';
+import Quiz from './Pages/Quiz';
 
 const router = createBrowserRouter([
   {

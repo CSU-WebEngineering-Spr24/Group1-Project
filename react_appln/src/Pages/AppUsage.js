@@ -1,7 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
 
-function Home({name="home"}) {
+import logo from '../logo.svg';
+import '../App.css';
+
+function AppUsage({name="AppUsage"}) {
   return (
     <div >
       <header className="App-header">
@@ -22,4 +24,4 @@ function Home({name="home"}) {
   );
 }
 
-export default Home;
+export default AppUsage;
