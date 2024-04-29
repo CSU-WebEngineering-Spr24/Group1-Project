@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Outlet } from 'react-router-dom';
-import Sidebar from './SIdebar';
+import Sidebar from './Components/SIdebar';
 
 function App({name="home"} ) {
   return (

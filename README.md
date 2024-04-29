@@ -31,8 +31,9 @@ Alternative repo due to permission issues regarding git 'issues'
 
 ## In Progress
 
-- Create Repository for application (Assignees: Himanshu-Bohra)
-- Implement OpenTriviaDataBase API on the Spring backend (Assignees: Himanshu-Bohra and Akshith-github)
+- Refactor API queries and responses.
+- Work on QuestionGenerator.
+- Work on React FrontEnd for the Arcade mode first.
 
 ## Done
-
+- Skeleton
