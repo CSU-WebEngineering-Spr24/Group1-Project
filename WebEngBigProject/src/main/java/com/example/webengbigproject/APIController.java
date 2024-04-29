@@ -89,8 +89,14 @@ public class APIController
         return FactGenerator.generateFacts(openTDBResponse);
     }
 
+    // @GetMapping(value = { "/","/facts", "/usage","/home"})
+    // public String index()
+    // {
+    //     return "index"; // This will serve index.html located in src/main/resources/templates/
+    // }
 
-    @GetMapping("**")
+
+    @GetMapping("/apiusage")
     public String everythingElse()//,
     // @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount)
     {
@@ -98,6 +104,7 @@ public class APIController
                 "<b><i>You are seeing this page because you are not using the API call properly." +
                 "<br><br>For questions please use '/questions?' followed by 'mode=' (arcade/challenge/quick)." +
                 "<br><br>For fetching facts, please use '/facts?' followed by 'count='(number of facts)." +
+                "<br><br>For going to ui, please use '/home'." +
                 "</div>" +
                 "<script> " +
                 "document.getElementById(\"main\").style.border = \"thick solid #fcba03\"; " +
