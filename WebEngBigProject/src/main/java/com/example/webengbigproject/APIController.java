@@ -4,6 +4,8 @@ import com.example.webengbigproject.DataMuse.DataMuseResponse;
 import com.example.webengbigproject.DataMuse.DataMuseService;
 import com.example.webengbigproject.OpenTDB.OpenTDBService;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBResponse;
+import com.example.webengbigproject.Utilities.Fact;
+import com.example.webengbigproject.Utilities.FactGenerator;
 import com.example.webengbigproject.Utilities.Question;
 import com.example.webengbigproject.Utilities.QuestionGenerator;
 import org.springframework.web.bind.annotation.*;
@@ -30,25 +32,25 @@ public class APIController
 
 
 
-    @GetMapping("/getDefault")
-    public OpenTriviaDBResponse getQuestion()
+    @GetMapping("/openTDefault")
+    public OpenTriviaDBResponse getOpenTDBQuestion()
     {
         return _openTDBService.getOpenTDBObject();
     }
 
 
-    @GetMapping("/getByAmount")
-    public OpenTriviaDBResponse getQuestion(@RequestParam(value = "amount", required = false) Integer amount)
+    @GetMapping("/openTByAmount")
+    public OpenTriviaDBResponse getOpenTDBQuestion(@RequestParam(value = "amount", required = false) Integer amount)
     {
         return _openTDBService.getOpenTDBObject(amount);
     }
 
 
 
-    @GetMapping("/get")
-    public OpenTriviaDBResponse getQuestion(@RequestParam(value = "amount", required = false, defaultValue = "1") Integer amount,
-                                          @RequestParam(value = "difficulty", required = false, defaultValue = "easy") String difficulty,
-                                              @RequestParam(value = "type", required = false, defaultValue = "multiple") String type)
+    @GetMapping("/openTQuestions")
+    public OpenTriviaDBResponse getOpenTDBQuestion(@RequestParam(value = "amount", required = false, defaultValue = "1") Integer amount,
+                                                   @RequestParam(value = "difficulty", required = false, defaultValue = "easy") String difficulty,
+                                                   @RequestParam(value = "type", required = false, defaultValue = "multiple") String type)
     {
         return _openTDBService.getOpenTDBObject(amount, difficulty, type);
     }
@@ -72,8 +74,36 @@ public class APIController
         if(gameMode.equalsIgnoreCase("challenge")) amount = 20;
         if(gameMode.equalsIgnoreCase("quick")) amount = 5;
 
-        OpenTriviaDBResponse openTDBResponse = getQuestion(amount, "medium", "multiple");
+        OpenTriviaDBResponse openTDBResponse = getOpenTDBQuestion(amount, "medium", "multiple");
         return QuestionGenerator.generateQuestions(openTDBResponse);
+    }
+
+
+    @GetMapping("/facts")
+    public ArrayList<Fact> getFacts(@RequestParam(value = "count", required = false, defaultValue = "10") Integer count)//,
+    // @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount)
+    {
+
+
+        OpenTriviaDBResponse openTDBResponse = getOpenTDBQuestion(count, "medium", "multiple");
+        return FactGenerator.generateFacts(openTDBResponse);
+    }
+
+
+    @GetMapping("**")
+    public String everythingElse()//,
+    // @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount)
+    {
+        return "<div id = \"main\">" +
+                "<b><i>You are seeing this page because you are not using the API call properly." +
+                "<br><br>For questions please use '/questions?' followed by 'mode=' (arcade/challenge/quick)." +
+                "<br><br>For fetching facts, please use '/facts?' followed by 'count='(number of facts)." +
+                "</div>" +
+                "<script> " +
+                "document.getElementById(\"main\").style.border = \"thick solid #fcba03\"; " +
+                "document.getElementById(\"main\").style.color = \"#ffffff\";" +
+                "document.body.style.backgroundColor = \"black\";" +
+                "</script>";
     }
 
 
