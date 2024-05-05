@@ -9,7 +9,7 @@ import jakarta.annotation.Generated;
 @CrossOrigin(origins = "*", allowedHeaders = "*") // Allow all? (at least gets rid of CORS)
 public class HomeController
 {
-    @GetMapping(value = { "/","/readfacts", "/usage","/home","/quiz"})
+    @GetMapping(value = { "/","/readfacts", "/usage","/home","/quiz" , "/dashboard" })
     public String index()
     {
         return "index"; // This will serve index.html located in src/main/resources/templates/

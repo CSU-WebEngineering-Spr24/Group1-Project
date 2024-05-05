@@ -8,6 +8,7 @@ import Home from './Pages/Home';
 import FormPage from './Pages/FormPage';
 import AppUsagePage from './Pages/AppUsage';
 import Quiz from './Pages/Quiz';
+import Dashboard from './Pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,11 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { 
-        path: "home",
+        path: "/",
+        element: <Home />
+      },
+      { 
+        path: "/home",
         element: <Home />
       },
       {
@@ -30,7 +35,11 @@ const router = createBrowserRouter([
         path: "quiz",
         element: <Quiz />,
       },
-    ],
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      }
+    ]
   }
 ]);
 
