@@ -1,5 +1,9 @@
 package com.example.webengbigproject.Utilities;
 
+/**
+ * @author Himanshu Bohra
+ * Generates Facts by pulling data from multiple APIs
+ */
 import com.example.webengbigproject.DataMuse.DataMuseResponse;
 import com.example.webengbigproject.DataMuse.DataMuseService;
 import com.example.webengbigproject.DataMuse.DataMuseWordDefinitions;

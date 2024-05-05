@@ -1,5 +1,10 @@
 package com.example.webengbigproject.Utilities;
 
+/**
+ * @author Himanshu Bohra
+ * Class for JSON object serialization (user score storage and retrieval)
+ */
+
 import com.example.webengbigproject.Dashboard.ResultJSON;
 import com.example.webengbigproject.Dashboard.ScoreResponseJSON;
 import com.fasterxml.jackson.core.type.TypeReference;

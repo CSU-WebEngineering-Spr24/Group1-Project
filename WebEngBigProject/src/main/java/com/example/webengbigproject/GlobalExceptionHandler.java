@@ -3,7 +3,10 @@ package com.example.webengbigproject;
 /**
  * @author Himanshu Bohra
  * This is an exception handler for all un-mapped api calls. Displays a help page.
+ * W.I.P
  */
+
+//FIXME: If default auto mapping is allowed for the react/frontend components, this breaks and vice-versa.
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

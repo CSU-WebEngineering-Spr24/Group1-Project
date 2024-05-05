@@ -1,4 +1,8 @@
 package com.example.webengbigproject;
+/**
+ * @author Himanshu Bohra
+ * Main API controller with all the API endpoint mappings.
+ */
 
 import com.example.webengbigproject.Dashboard.ResultJSON;
 import com.example.webengbigproject.Dashboard.ScoreResponseJSON;
@@ -11,15 +15,13 @@ import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-/*
-    TODO: Refactor this code to generate a custom API such that frontend only needs to ask a question
-    LATER: There will be a random generator class which will fetch from random API.
- */
+
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*") // Allow all? (at least gets rid of CORS)
@@ -70,7 +72,6 @@ public class APIController
     }
 
 
-    // TODO: MAP THE PARAMETERS PROPERLY! ARCADE (must have some unique attributes; use ENUMS?) W.I.P
     @GetMapping("/questions")
     public ArrayList<Question> getQuestions(@RequestParam(value = "mode", required = false, defaultValue = "_") String gameMode,
                                             @RequestParam(value = "amount", required = false, defaultValue = "1") Integer amount)
@@ -171,6 +172,7 @@ public class APIController
                 "document.body.style.backgroundColor = \"black\";" +
                 "</script>";
     }
+
 
 
 }

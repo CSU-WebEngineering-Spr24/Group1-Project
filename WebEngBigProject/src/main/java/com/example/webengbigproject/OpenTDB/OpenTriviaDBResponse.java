@@ -13,10 +13,10 @@ public class OpenTriviaDBResponse
 {
     // Making a temporary fix before refactoring
     @JsonProperty("results")
-    private ArrayList<OpenTriviaDBQuestion> _results;
+    public ArrayList<OpenTriviaDBQuestion> _results;
 
     @JsonProperty("response_code")
-    private String _responseCode;
+    public String _responseCode;
 
 
 

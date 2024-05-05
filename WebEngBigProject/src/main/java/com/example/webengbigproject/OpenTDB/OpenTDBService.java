@@ -1,5 +1,10 @@
 package com.example.webengbigproject.OpenTDB;
 
+/**
+ * @author Himanshu Bohra
+ * Service class for the open trivia database API
+ */
+
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

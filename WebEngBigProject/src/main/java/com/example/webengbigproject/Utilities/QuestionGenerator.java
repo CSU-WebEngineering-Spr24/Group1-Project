@@ -25,7 +25,6 @@ public class QuestionGenerator
 
     }
 
-    // TODO: Get responses from ALL APIs and then process/filter the responses to generate questions.
     /**
      * This generates questions from the given data. It will combine multiple responses into a single
      * questions list. This is a WORK IN PROGRESS.
@@ -52,23 +51,4 @@ public class QuestionGenerator
         return questions;
     }
 
-    /*
-    // FIXME: Need a random unrelated word to query, so to get the incorrect defs.
-    // Do we get /use two different queries? NO: We can use the amount parameter to get multi in same q.
-    private static  void handleDataMuse(DataMuseResponse dataMuseResponse)
-    {
-        String word = dataMuseResponse.getWord();
-        ArrayList<DataMuseWordDefinitions> defs = dataMuseResponse._defs;
-
-        Question question = new Question();
-        question._question = "Which definition best describes the following word: " + word + "?";
-
-        int randomIndex = random.nextInt(0, defs.size());
-        question._correctAnswer = defs.get(randomIndex);
-
-        // TODO: Use a random number generator to pick a definition (incorrect)
-
-    }
-
-     */
 }

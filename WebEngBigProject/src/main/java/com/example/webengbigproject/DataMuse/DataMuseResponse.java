@@ -22,7 +22,6 @@ public class DataMuseResponse
     @JsonProperty("score")
     public int _score;
 
-    // FIXME: ISSUES WITH PARSING THIS ATTRIBUTE; RETURNS NULL.
     @JsonProperty("defs")
     public ArrayList<String> _defs;
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 // This service annotation is important; otherwise SpringBoot will not know that this needs
 // to be autowired into your main app.
 
-// TODO: Make these services extend a APIService abstract class, each must have getResponseObject()
 
 /**
  * This class will allow the program/game to generate 2 types of questions: guess definition by word
@@ -37,7 +36,6 @@ public class DataMuseService
 
 
 
-    // TODO: Need to figure something better out for the default response.
     private static final String DEFAULT_REQUEST = "sp=*a*&md=d&max=1";
 
     private final RestTemplate restTemplate;
