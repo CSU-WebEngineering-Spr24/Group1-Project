@@ -3,8 +3,27 @@ import { Container, Button, Form, Modal, Card, ListGroup } from 'react-bootstrap
 import QuestionCard from '../Components/QuestionCard';
 import QuestionMenubar from '../Components/QuestionMenubar';
 
+
+/* 
+arcade = 10;
+timed = 10;
+quick = 5;
+marathon = 50;
+ 
+survival = infinite  START WITH 100 HEALTH -1 IF WRORNG ANSWER
+freeplay = should be infinite, show 10 questions at a time to user, till they want to quit
+timed will have a timer; survival will have... by Himanshu Bohra [STUDENT]
+Himanshu Bohra [STUDENT]
+03:14
+timed will have a timer;
+survival will have unlimited questions + a 100 health points
+
+
+*/
+
 function Quiz() {
   const [numQuestions, setNumQuestions] = useState(5);
+  const [ mode , setMode ] = useState("arcade");
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -16,7 +35,7 @@ function Quiz() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch(`/questions`);
+      const response = await fetch(`/questions?mode=${mode}`);
       const data = await response.json();
       setQuestions(data);
       console.log(questions)
@@ -27,6 +46,15 @@ function Quiz() {
   };
 
   const startQuiz = () => {
+    if (mode === "arcade") {
+      setNumQuestions(5);
+    } else if (mode === "timed") {
+      setNumQuestions(10);
+    } else if (mode === "quick") {
+      setNumQuestions(5);
+    } else if (mode === "marathon") {
+      setNumQuestions(50);
+    }
     fetchQuestions();
     setVisited({});
   };
@@ -77,8 +105,14 @@ function Quiz() {
           <Card.Body>
             <Form>
               <Form.Group>
-                <Form.Label>Number of questions:</Form.Label>
-                <Form.Control type="number" value={numQuestions} onChange={e => setNumQuestions(parseInt(e.target.value))} />
+                <Form.Label> Select Mode </Form.Label>
+                <Form.Control as="select" value={mode} onChange={e => setMode(e.target.value)}>
+                  <option value="arcade">Arcade</option>
+                  <option value="timed">Timed</option>
+                  <option value="quick">Quick</option>
+                  <option value="marathon">Marathon</option>
+                  <option value="survival">Survival</option>
+                </Form.Control>
               </Form.Group>
               <Button variant="primary" onClick={startQuiz}>Start Quiz</Button>
             </Form>
@@ -104,6 +138,7 @@ function Quiz() {
                   onSelect={handleAnswerSelect}
                 />
               )}
+              <Button variant="primary" onClick={() => handleSelectQuestion(currentQuestionIndex + 1)} className="mt-3">Next Question</Button>
               <Button variant="primary" onClick={evaluateAnswers} className="mt-3">Evaluate</Button>
             </Card.Body>
           </Card>
