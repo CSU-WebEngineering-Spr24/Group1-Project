@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
 import '../App.css';
+import useFactsStore from './factsstore'; 
+ 
 
 function FormPage() {
-  const [facts, setFacts] = useState([]);
-  const [count, setCount] = useState(5);
-
-  // useEffect(() => {
-  //   fetchFacts();
-  // }, [count]);
-
-  const fetchFacts = () => {
-    fetch(`/facts?count=${count}`)
-      .then(response => response.json())
-      .then(data => setFacts(data))
-      .catch(error => console.error('Error fetching facts:', error));
-  };
+  const { facts, count, setFacts, setCount, fetchFacts } = useFactsStore();
 
   const handleCountChange = (e) => {
     setCount(e.target.value);
