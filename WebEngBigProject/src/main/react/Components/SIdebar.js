@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -9,11 +9,20 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 import { Home, Equalizer, ViewColumn, Person } from '@mui/icons-material';
-//icon for dashboard
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
-
 const Sidebar = () => {
+  const [username, setUsername] = useState(localStorage.getItem('user') || '');
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handleSaveUsername = () => {
+    localStorage.setItem('user', username);
+    alert('Username saved successfully!');
+  };
+
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -44,7 +53,15 @@ const Sidebar = () => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
-          <div style={{ padding: '20px 5px' }}>Quiz Challanger</div>
+          <div style={{ padding: '20px 5px' }}>
+            <input
+              type="text"
+              placeholder="Enter username"
+              value={username}
+              onChange={handleUsernameChange}
+            />
+            <button onClick={handleSaveUsername}>Save Username</button>
+          </div>
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>

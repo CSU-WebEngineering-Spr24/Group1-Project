@@ -102,18 +102,38 @@ function Quiz() {
   };
 
   const evaluateAnswers = () => {
+    let calculatedScore = 0;
     if (mode === 'freeplay' || mode === 'survival') {
+      calculatedScore = score;
       resetQuiz();
-      return;
-    }
-    if (reviewAnswers) {
-      const calculatedScore = questions.reduce((acc, question, index) => {
+    }else if (reviewAnswers) {
+      calculatedScore = questions.reduce((acc, question, index) => {
         return acc + (answers[index] === question.correct_answer ? 1 : 0);
       }, 0);
       setScore(calculatedScore);
+      setReviewAnswers(!reviewAnswers);
+      setShowScoreModal(true);
     }
-    setReviewAnswers(!reviewAnswers);
-    setShowScoreModal(true);
+
+    /* @GetMapping("/submit")
+    public ResponseEntity<String> getFacts(
+                                    @RequestParam(value = "mode", required = false, defaultValue = "arcade") String mode,
+                                    @RequestParam(value = "user", required = false, defaultValue = "UNKNOWN") String user,
+                                    @RequestParam(value = "score", required = false, defaultValue = "0") Integer score)
+    { */
+
+    // get user from local storage if available else use unknown
+    const user = localStorage.getItem('user') ? localStorage.getItem('user') : 'UNKNOWN';
+
+    // get api call
+    try {
+      const response = fetch(`/submit?mode=${mode}&user=${user}&score=${calculatedScore}`);
+      alert ('Score submitted successfully!'+ mode + ' ' + user + ' ' + calculatedScore);
+      console.log(response);
+    } catch (error) {
+      console.error('Error submitting score:', error);
+    }
+    
   };
 
   const resetQuiz = () => {
@@ -193,7 +213,7 @@ function Quiz() {
           )}
 
           <Card className="mt-3">
-            <Card.Header>
+            <Card.Header className="justify-content-between">
               Question {currentQuestionIndex + 1}
               {mode === 'timed' && (
                 <span className="float-right">Time Left: {formatTime()}</span>
