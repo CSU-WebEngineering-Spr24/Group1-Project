@@ -72,7 +72,7 @@ public class APIController
 
     // TODO: MAP THE PARAMETERS PROPERLY! ARCADE (must have some unique attributes; use ENUMS?) W.I.P
     @GetMapping("/questions")
-    public ArrayList<Question> getQuestions(@RequestParam(value = "mode", required = false) String gameMode,
+    public ArrayList<Question> getQuestions(@RequestParam(value = "mode", required = false, defaultValue = "_") String gameMode,
                                             @RequestParam(value = "amount", required = false, defaultValue = "1") Integer amount)
     {
         if(gameMode.equalsIgnoreCase("arcade")) amount = 10;
