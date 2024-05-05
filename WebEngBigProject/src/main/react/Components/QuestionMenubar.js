@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { ButtonGroup, Button, Container, Col } from 'react-bootstrap';
 
 function QuestionMenubar({ questions, currentQuestion, onSelect, status }) {
   // Function to determine button variant based on status
@@ -16,22 +16,25 @@ function QuestionMenubar({ questions, currentQuestion, onSelect, status }) {
   };
 
   return (
-    <ButtonGroup>
-      {questions.map((_, index) => {
-        const buttonVariant = getButtonVariant(status[index]);
+    <Container className="overflow-auto">
+      <ButtonGroup className="d-flex flex-wrap">
+        {questions.map((_, index) => {
+          const buttonVariant = getButtonVariant(status[index]);
 
-        return (
-          <Button
-            key={index}
-            variant={buttonVariant}
-            onClick={() => onSelect(index)}
-            active={index === currentQuestion}
-          >
-            {index + 1}
-          </Button>
-        );
-      })}
-    </ButtonGroup>
+          return (
+            <Button
+              key={index}
+              variant={buttonVariant}
+              onClick={() => onSelect(index)}
+              active={index === currentQuestion}
+              className="m-1"
+            >
+              {index + 1}
+            </Button>
+          );
+        })}
+      </ButtonGroup>
+    </Container>
   );
 }
 
