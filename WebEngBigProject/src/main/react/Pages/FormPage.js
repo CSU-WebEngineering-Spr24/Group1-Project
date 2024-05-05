@@ -42,7 +42,8 @@ function FormPage() {
         </Col>
       </Row>
       <Row className="mt-3">
-        {facts.map((fact, index) => (
+        {!Array.isArray(facts) && <p>Try fetching facts... NO FACTS FOUND</p>}
+        {Array.isArray(facts) && facts.map((fact, index) => (
           <Col md={4} key={index} className="mb-4">
             <Card>
               <Card.Body>
