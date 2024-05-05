@@ -19,18 +19,18 @@ function shuffleArray(array) {
   return array;
 }
 
-function QuestionCard({ question, correctAnswer, incorrectAnswers, selected, onSelect }) {
+function QuestionCard({ question, correctAnswer, incorrectAnswers, selected, onSelect ,showAnswer}) {
   // Combine and shuffle the options
   console.log("question", question);
   console.log("correctAnswer", correctAnswer);
   console.log("incorrectAnswers", incorrectAnswers);
-  
+
   const options = shuffleArray([correctAnswer, ...incorrectAnswers]);
 
   return (
     <Form.Group>
       <Form.Label>{question}</Form.Label>
-      <Form.Control as="select" value={selected} onChange={e => onSelect(e.target.value)}>
+      <Form.Control as="select" value={selected} onChange={e => onSelect(e.target.value)} disabled={showAnswer}>
         <option value="">Select an answer</option>
         {options.map((option, index) => (
           <option key={index} value={option}>{option}</option>

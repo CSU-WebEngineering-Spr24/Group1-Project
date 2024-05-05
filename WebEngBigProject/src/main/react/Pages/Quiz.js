@@ -15,8 +15,10 @@ function Quiz() {
   const [quizStarted, setQuizStarted] = useState(false);
   const [score, setScore] = useState(0);
   const [timer, setTimer] = useState(null);
-  const [timeLeft, setTimeLeft] = useState(10); // 10 seconds
+  const [timeLeft, setTimeLeft] = useState(600); // 10 seconds
   const [showAnswer, setshowAnswer] = useState(false);
+  // health
+  const [health, setHealth] = useState(100);
 
 
   const fetchQuestions = async () => {
@@ -25,7 +27,7 @@ function Quiz() {
       let response = null;
       let data = { 'status': 200 };
       while ('status' in data) {
-        if (mode === 'freeplay') {
+        if (mode === 'freeplay' || mode === 'survival') {
           response = await fetch('/questions?amount=1');
         }
         else {
@@ -82,13 +84,25 @@ function Quiz() {
 
   const handleAnswerSelect = answer => {
     setAnswers({ ...answers, [currentQuestionIndex]: answer });
-    if (mode === 'freeplay') {
-    setshowAnswer(true);
+    if (mode === 'freeplay' || mode === 'survival') {
+      setshowAnswer(true);
+      if (answer === questions[currentQuestionIndex].correct_answer) {
+        setScore(prevScore => prevScore + 1);
+      }
+      else{
+        if (mode === 'survival') {
+          if (health- 10 <= 0) {
+            alert("You have died. Your score is " + score + ". your answer is " + answer + ". The correct answer is " + questions[currentQuestionIndex].correct_answer);
+            evaluateAnswers();
+          }
+          setHealth(prevHealth => prevHealth - 10);
+        }
+      }
     }
   };
 
   const evaluateAnswers = () => {
-    if (mode === 'freeplay') {
+    if (mode === 'freeplay' || mode === 'survival') {
       resetQuiz();
       return;
     }
@@ -112,8 +126,9 @@ function Quiz() {
     setVisited({});
     setCurrentQuestionIndex(0);
     setScore(0);
-    setTimeLeft(10); // Reset timer to 10 minutes
+    setTimeLeft(600); // Reset timer to 10 minutes
     setMode('arcade');
+    setHealth(100);
   };
 
   const getStatus = index => {
@@ -129,7 +144,7 @@ function Quiz() {
   };
 
   const nextQuestion = () => {
-    if (mode === 'freeplay') {
+    if (mode === 'freeplay' || mode === 'survival') {
       console.log('freeplay');
       fetchQuestions();
       console.log(questions);
@@ -183,6 +198,12 @@ function Quiz() {
               {mode === 'timed' && (
                 <span className="float-right">Time Left: {formatTime()}</span>
               )}
+              {mode === 'survival' && (
+                <span className="float-right">Health: {health}</span>
+              )}
+              {(mode === 'freeplay' || mode === 'survival') && (
+                <span className="float-right">Score: {score}</span>
+              )}
             </Card.Header>
             <Card.Body>
               {console.log(questions)}
@@ -193,6 +214,7 @@ function Quiz() {
                   incorrectAnswers={questions[currentQuestionIndex].incorrect_answers}
                   selected={answers[currentQuestionIndex]}
                   onSelect={handleAnswerSelect}
+                  showAnswer={showAnswer}
                 />
               )}
               {showAnswer && (
@@ -203,8 +225,8 @@ function Quiz() {
               )}
               {mode === 'freeplay' && (
                 <>
-                <Button variant="primary" onClick={nextQuestion} className="mt-3">Next Question</Button>
-                <Button variant="primary" onClick={evaluateAnswers} className="mt-3">Quit</Button>
+                  <Button variant="primary" onClick={nextQuestion} className="mt-3">Next Question</Button>
+                  <Button variant="primary" onClick={evaluateAnswers} className="mt-3">Quit</Button>
                 </>
               )}
               {mode !== 'freeplay' && (
