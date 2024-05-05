@@ -16,8 +16,8 @@ public class DataMuseWordDefinitions
     //@JsonProperty("word")
     //private ArrayList<String> _word;
 
-    @JsonProperty("defs")
-    private List<String> _definitions;
+    @JsonProperty("def")
+    public String _definition;
 
 
     // Getters

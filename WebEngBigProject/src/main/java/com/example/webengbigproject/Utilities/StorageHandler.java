@@ -110,5 +110,20 @@ public class StorageHandler
         //objectMapper.writeValue(scoreFile, scores);
     }
 
+    public void resetScores() throws IOException
+    {
+        // Just create a blank empty file. If a submission request is made, it will be auto populated.
+        //scoreFile.createNewFile();
+        try (PrintWriter writer = new PrintWriter(scoreFile))
+        {
+            // This will clear out the contents of the file by new printwriter
+            System.out.println("resetScores() : File contents cleared successfully.");
+        }
+        catch (Exception e)
+        {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+        }
+    }
+
 
 }

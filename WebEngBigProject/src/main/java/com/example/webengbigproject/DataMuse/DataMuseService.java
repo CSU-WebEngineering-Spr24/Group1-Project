@@ -32,6 +32,9 @@ public class DataMuseService
     private static final String CHAR_START = "&sp=*";
     private static final String CHAR_END = "*";
 
+    // THIS WAS THE CULPRIT FOR NOT CATCHING DEFS ALL ALONG, DIDN'T IMPLEMENT THIS!
+    private static final String DEFINITIONS_ENABLED = "&md=d";
+
 
 
     // TODO: Need to figure something better out for the default response.
@@ -69,7 +72,7 @@ public class DataMuseService
         if (amount < 1) amount = 1;
         if (randomCharacter.isEmpty()) randomCharacter = "a";
 
-        String url = BASE_URL + CHAR_START + randomCharacter + CHAR_END + AMOUNT + amount;
+        String url = BASE_URL + CHAR_START + randomCharacter + CHAR_END + AMOUNT + amount + DEFINITIONS_ENABLED;
         ArrayList<DataMuseResponse> returnList = new ArrayList<DataMuseResponse>();
         //returnList.add(restTemplate.getForObject(url, DataMuseResponse.class));
         return restTemplate.getForObject(url, DataMuseResponse[].class);

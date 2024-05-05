@@ -1,6 +1,8 @@
 package com.example.webengbigproject.DataMuse;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBQuestion;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +33,6 @@ public class DataMuseResponse
         return _word;
     }
 
-    public ArrayList<String> getDefs()
-    {
-        return _defs;
-    }
+
+
 }

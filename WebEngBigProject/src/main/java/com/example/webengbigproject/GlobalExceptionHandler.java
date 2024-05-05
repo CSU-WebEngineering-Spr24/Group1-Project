@@ -1,0 +1,37 @@
+package com.example.webengbigproject;
+
+/**
+ * @author : Himanshu Bohra
+ * This is an exception handler for all un-mapped api calls. Displays a help page.
+ */
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.NoHandlerFoundException;
+
+@ControllerAdvice
+public class GlobalExceptionHandler
+{
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public ResponseEntity<Object> handleEverythingElse(NoHandlerFoundException e) {
+        // Custom page
+        String customResponse = "<div id = \"main\">" +
+                "<b><i>You are seeing this page because you are not using the API call properly." +
+                "<br><br>For questions please use '/questions?' followed by 'mode=' (arcade/challenge/quick)." +
+                "<br><br>For fetching facts, please use '/facts?' followed by 'count='(number of facts)." +
+                "<br><br>For fetching scores, please use '/readscores?'." +
+                "<br><br>For submitting scores, please use '/submit?' followed by 'user='(user name), '&mode='(modename) and '&score='(integer score)." +
+                "<br><br>For resetting scores, please use '/resetscores?'." +
+                "<br><br>For going to ui, please use '/home'." +
+                "</div>" +
+                "<script> " +
+                "document.getElementById(\"main\").style.border = \"thick solid #fcba03\"; " +
+                "document.getElementById(\"main\").style.color = \"#ffffff\";" +
+                "document.body.style.backgroundColor = \"black\";" +
+                "</script>";
+        // Return the custom response with a 404 Not Found status
+        return new ResponseEntity<>(customResponse, HttpStatus.NOT_FOUND);
+    }
+}

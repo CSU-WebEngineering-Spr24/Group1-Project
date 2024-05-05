@@ -10,5 +10,4 @@ public class ResultJSON
     @JsonProperty
     public Integer _score;
 
-
 }

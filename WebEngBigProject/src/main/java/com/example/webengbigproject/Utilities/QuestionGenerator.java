@@ -1,6 +1,7 @@
 package com.example.webengbigproject.Utilities;
 
 import com.example.webengbigproject.DataMuse.DataMuseResponse;
+import com.example.webengbigproject.DataMuse.DataMuseWordDefinitions;
 import com.example.webengbigproject.OpenTDB.OpenTDBService;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBQuestion;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBResponse;
@@ -51,12 +52,13 @@ public class QuestionGenerator
         return questions;
     }
 
+    /*
     // FIXME: Need a random unrelated word to query, so to get the incorrect defs.
     // Do we get /use two different queries? NO: We can use the amount parameter to get multi in same q.
     private static  void handleDataMuse(DataMuseResponse dataMuseResponse)
     {
         String word = dataMuseResponse.getWord();
-        ArrayList<String> defs = dataMuseResponse.getDefs();
+        ArrayList<DataMuseWordDefinitions> defs = dataMuseResponse._defs;
 
         Question question = new Question();
         question._question = "Which definition best describes the following word: " + word + "?";
@@ -67,4 +69,6 @@ public class QuestionGenerator
         // TODO: Use a random number generator to pick a definition (incorrect)
 
     }
+
+     */
 }
