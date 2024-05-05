@@ -21,6 +21,10 @@ function shuffleArray(array) {
 
 function QuestionCard({ question, correctAnswer, incorrectAnswers, selected, onSelect }) {
   // Combine and shuffle the options
+  console.log("question", question);
+  console.log("correctAnswer", correctAnswer);
+  console.log("incorrectAnswers", incorrectAnswers);
+  
   const options = shuffleArray([correctAnswer, ...incorrectAnswers]);
 
   return (
