@@ -4,4 +4,28 @@
     "_user" : "UNKNOWN",
     "_score" : 0
   } ]
+}, {
+  "_mode" : "timed",
+  "_results" : [ {
+    "_user" : "raj",
+    "_score" : 0
+  } ]
+}, {
+  "_mode" : "quick",
+  "_results" : [ {
+    "_user" : "hero",
+    "_score" : 3
+  } ]
+}, {
+  "_mode" : "marathon",
+  "_results" : [ {
+    "_user" : "hero",
+    "_score" : 0
+  } ]
+}, {
+  "_mode" : "freeplay",
+  "_results" : [ {
+    "_user" : "hero",
+    "_score" : 5
+  } ]
 } ]

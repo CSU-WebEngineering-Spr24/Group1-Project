@@ -2,100 +2,49 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Container, Row, Col, Card, Table, Dropdown } from 'react-bootstrap';
 import { AccountCircle } from '@mui/icons-material';
 import Chart from 'chart.js/auto';
+import axios from 'axios';
 
-const scoresData = [
-    {
-      "_mode": "arcade",
-      "_results": [
-        {
-          "_user": "dfg",
-          "_score": 11
-        },
-        {
-          "_user": "fghgfh",
-          "_score": 11
-        },
-        {
-          "_user": "user3",
-          "_score": 13
-        },
-        {
-          "_user": "user4",
-          "_score": 9
-        }
-      ]
-    },
-    {
-      "_mode": "marathon",
-      "_results": [
-        {
-          "_user": "xyz",
-          "_score": 15
-        },
-        {
-          "_user": "abc",
-          "_score": 12
-        },
-        {
-          "_user": "user5",
-          "_score": 14
-        },
-        {
-          "_user": "user6",
-          "_score": 11
-        }
-      ]
-    },
-    {
-      "_mode": "timed",
-      "_results": [
-        {
-          "_user": "pqr",
-          "_score": 10
-        },
-        {
-          "_user": "uvw",
-          "_score": 9
-        },
-        {
-          "_user": "user7",
-          "_score": 12
-        },
-        {
-          "_user": "user8",
-          "_score": 8
-        }
-      ]
-    },
-    {
-      "_mode": "survival",
-      "_results": [
-        {
-          "_user": "lmn",
-          "_score": 8
-        },
-        {
-          "_user": "ijk",
-          "_score": 7
-        },
-        {
-          "_user": "user9",
-          "_score": 10
-        },
-        {
-          "_user": "user10",
-          "_score": 6
-        }
-      ]
-    }
-  ];
+
   
 
 const Dashboard = () => {
   const [selectedMode, setSelectedMode] = useState("arcade");
+  const [scoresData, setScoresData] = useState([]);
   const chartRef = useRef(null);
 
   useEffect(() => {
+    // Fetch scoresData from the /readscores endpoint
+    if (scoresData.length <= 0) {
+      axios.get('/readscores')
+        .then(response => {
+          setScoresData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching scoresData:', error);
+        });
+      }
+  }, []);
+  
+  useEffect(() => {
+      axios.get('/readscores')
+        .then(response => {
+          setScoresData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching scoresData:', error);
+        });
+  }, [selectedMode]);
+
+  useEffect(() => {
+    if (scoresData.length <= 0) {
+    axios.get('/readscores')
+      .then(response => {
+        setScoresData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching scoresData:', error);
+      });
+    }
     if (chartRef.current !== null && chartRef.current !== undefined) {
       const chartInstance = chartRef.current.chartInstance;
       if (chartInstance !== null && chartInstance !== undefined) {
@@ -132,6 +81,16 @@ const Dashboard = () => {
   }, [selectedMode]);
 
   useEffect(() => {
+    if (scoresData.length <= 0) {
+      axios.get('/readscores')
+        .then(response => {
+          setScoresData(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching scoresData:', error);
+        });
+      }
+
     if (!selectedMode) return;
 
     const selectedModeData = scoresData.find(data => data._mode === selectedMode);
@@ -148,7 +107,7 @@ const Dashboard = () => {
         chartInstance.update();
       }
     }
-  }, [selectedMode]);
+  }, [selectedMode,scoresData]);
 
   return (
     <Container>
@@ -189,7 +148,7 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {scoresData.find(data => data._mode === selectedMode)._results.map((result, idx) => (
+                  {scoresData.find(data => data._mode === selectedMode) && scoresData.find(data => data._mode === selectedMode)._results.map((result, idx) => (
                     <tr key={idx}>
                       <td><AccountCircle /> {result._user}</td>
                       <td>{result._score}</td>
