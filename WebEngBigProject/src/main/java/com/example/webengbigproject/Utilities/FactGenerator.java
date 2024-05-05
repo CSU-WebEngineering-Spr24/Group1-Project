@@ -41,6 +41,7 @@ public class FactGenerator
                 q = q.substring(q.length()-2) + ":";
             }
             fact._fact = "Did you know " + q + " " + eachQuestion.getCorrectAnswer() + "!";
+            fact._fact = org.jsoup.parser.Parser.unescapeEntities(fact._fact, true);
 
             facts.add(fact);
         }
@@ -59,21 +60,18 @@ public class FactGenerator
         for (DataMuseResponse eachResponse : dataMuseResponses)
         {
             String word = eachResponse._word;
-            System.out.println("WORD : " + word);
-            System.out.println("SCORE: " + eachResponse._score);
-            //ArrayList<String> defs = eachResponse._defs;
+
             ArrayList<String> defs = eachResponse._defs;
-            //System.out.println("DEFS: " + defs);
 
             fact = new Fact();
             int randomIndex = random.nextInt(0, defs.size());
             fact._fact = "Did you know " + word + " also means " + defs.get(randomIndex) + "?";
+            fact._fact = org.jsoup.parser.Parser.unescapeEntities(fact._fact, true);
 
             facts.add(fact);
         }
 
         return facts;
-        //fact._correctAnswer = defs.get(randomIndex);
     }
 
 
