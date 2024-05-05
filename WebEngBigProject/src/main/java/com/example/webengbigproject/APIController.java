@@ -10,6 +10,7 @@ import com.example.webengbigproject.Utilities.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /*
     TODO: Refactor this code to generate a custom API such that frontend only needs to ask a question
@@ -115,21 +116,35 @@ public class APIController
                                     @RequestParam(value = "user", required = false, defaultValue = "UNKNOWN") String user,
                                     @RequestParam(value = "score", required = false, defaultValue = "0") Integer score)
     {
-        ResultJSON resultJSON = new ResultJSON() {{_user = user; _score = score;}};
-        ScoreResponseJSON scoreResponseJSON = new ScoreResponseJSON() {{_mode = mode; _results.add(resultJSON);}};
+        ResultJSON resultJSON = new ResultJSON() {{_user = "BAD"; _score = 0;}};
+        ScoreResponseJSON scoreResponseJSON = new ScoreResponseJSON() {{_mode = "BAD"; _results.add(resultJSON);}};
 
         try
         {
+            System.out.println(storageHandler.SCORE_FILE_PATH);
             storageHandler.updateScores(mode, user, score);
             return (ArrayList<ScoreResponseJSON>) storageHandler.readScores();
         }
         catch (Exception e)
         {
+            System.out.println(Arrays.toString(e.getStackTrace()));
             return new ArrayList<ScoreResponseJSON>() {{add(scoreResponseJSON);}};
         }
 
     }
 
+    @GetMapping("/readscores")
+    public ArrayList<ScoreResponseJSON> readScoreFile()
+    {
+        try {
+            return storageHandler.readScores();
+        }
+        catch (Exception e)
+        {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            return new ArrayList<ScoreResponseJSON>();
+        }
+    }
 
 
     @RequestMapping("/apiUsage")

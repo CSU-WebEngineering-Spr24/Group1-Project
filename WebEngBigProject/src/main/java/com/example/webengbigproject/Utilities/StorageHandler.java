@@ -3,7 +3,9 @@ package com.example.webengbigproject.Utilities;
 import com.example.webengbigproject.Dashboard.ResultJSON;
 import com.example.webengbigproject.Dashboard.ScoreResponseJSON;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,13 +24,46 @@ public class StorageHandler
 {
 
     private static final String SCORE_FILE_NAME = "scores.json";
-    private static final String SCORE_FILE_PATH = Paths.get(System.getProperty("user.dir"), SCORE_FILE_NAME).toString();
+    public static final String SCORE_FILE_PATH = Paths.get(System.getProperty("user.dir"), SCORE_FILE_NAME).toString();
+
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private static final File scoreFile = new File(SCORE_FILE_PATH);
+
+    /*
+    static
+    {
+        try
+        {
+            if (!scoreFile.exists()) {
+                scoreFile.createNewFile();
+            }
+        }
+
+        catch(Exception e)
+            {
+                System.out.println("scores.json file creation error.");
+            }
+    }
+
+     */
+
 
 
     public ArrayList<ScoreResponseJSON> readScores() throws IOException
     {
-        return objectMapper.readValue(new File(SCORE_FILE_PATH), new TypeReference<ArrayList<ScoreResponseJSON>>(){});
+        File scoreFile = new File(SCORE_FILE_PATH);
+        if (!scoreFile.exists())
+        {
+            scoreFile.createNewFile();
+            return new ArrayList<ScoreResponseJSON>();
+        }
+
+        else if(scoreFile.length() == 0)
+        {
+            return new ArrayList<ScoreResponseJSON>();
+        }
+        return objectMapper.readValue(scoreFile, new TypeReference<ArrayList<ScoreResponseJSON>>(){});
     }
 
     public void updateScores(String mode, String user, int score) throws IOException
@@ -70,7 +105,9 @@ public class StorageHandler
 
     public void writeScores(List<ScoreResponseJSON> scores) throws IOException
     {
-        objectMapper.writeValue(new File(SCORE_FILE_PATH), scores);
+        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
+        writer.writeValue(scoreFile, scores);
+        //objectMapper.writeValue(scoreFile, scores);
     }
 
 
