@@ -1,13 +1,12 @@
 package com.example.webengbigproject;
 
+import com.example.webengbigproject.Dashboard.ResultJSON;
+import com.example.webengbigproject.Dashboard.ScoreResponseJSON;
 import com.example.webengbigproject.DataMuse.DataMuseResponse;
 import com.example.webengbigproject.DataMuse.DataMuseService;
 import com.example.webengbigproject.OpenTDB.OpenTDBService;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBResponse;
-import com.example.webengbigproject.Utilities.Fact;
-import com.example.webengbigproject.Utilities.FactGenerator;
-import com.example.webengbigproject.Utilities.Question;
-import com.example.webengbigproject.Utilities.QuestionGenerator;
+import com.example.webengbigproject.Utilities.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,6 +22,8 @@ public class APIController
 {
     private OpenTDBService _openTDBService = null;
     private DataMuseService _datamuseService = null;
+
+    private final StorageHandler storageHandler = new StorageHandler();
 
     public APIController(OpenTDBService openTDBService, DataMuseService dataMuseService)
     {
@@ -89,14 +90,49 @@ public class APIController
         return FactGenerator.generateFacts(openTDBResponse);
     }
 
-    // @GetMapping(value = { "/","/facts", "/usage","/home"})
-    // public String index()
-    // {
-    //     return "index"; // This will serve index.html located in src/main/resources/templates/
-    // }
+
+    // TODO: Make it read from the scores.txt file. The file must be updated through submit query
+    @GetMapping("/scores")
+    public ArrayList<ScoreResponseJSON> getScores(@RequestParam(value = "count", required = false, defaultValue = "10") Integer count)//,
+    {
+
+        // DEMO CODE: [This must be done through retrieval from a text file]
+        ResultJSON resultJSON = new ResultJSON() {{_user = "demoUser"; _score = 50;}};
+        ScoreResponseJSON  scoreResponseJSON= new ScoreResponseJSON()
+        {{
+            _mode = "arcade"; _results = new ArrayList<>() {{add(resultJSON);}};
+        }};
+
+        return new ArrayList<ScoreResponseJSON>() {{add(scoreResponseJSON);}};
+    }
 
 
-    @GetMapping("/apiusage")
+    // TODO: Change the return type to a response code like success 200 etc.
+    // TODO: Add a file store function.
+    @GetMapping("/submit")
+    public ArrayList<ScoreResponseJSON> getFacts(
+                                    @RequestParam(value = "mode", required = false, defaultValue = "arcade") String mode,
+                                    @RequestParam(value = "user", required = false, defaultValue = "UNKNOWN") String user,
+                                    @RequestParam(value = "score", required = false, defaultValue = "0") Integer score)
+    {
+        ResultJSON resultJSON = new ResultJSON() {{_user = user; _score = score;}};
+        ScoreResponseJSON scoreResponseJSON = new ScoreResponseJSON() {{_mode = mode; _results.add(resultJSON);}};
+
+        try
+        {
+            storageHandler.updateScores(mode, user, score);
+            return (ArrayList<ScoreResponseJSON>) storageHandler.readScores();
+        }
+        catch (Exception e)
+        {
+            return new ArrayList<ScoreResponseJSON>() {{add(scoreResponseJSON);}};
+        }
+
+    }
+
+
+
+    @RequestMapping("/apiUsage")
     public String everythingElse()//,
     // @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount)
     {
