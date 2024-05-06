@@ -1,4 +1,5 @@
 # Group1-Project
+## FactFusion: A trivia game application.
 
 # Commands
 
@@ -20,14 +21,11 @@ Alternative repo due to permission issues regarding git 'issues'
 
 ## To Do
 
-- Integrate Open movie Db API to the Facts response
-- Configuring Thymeleaf in Spring Boot
-- Update Readme before Final Demo Phase
+- N/A
 
 ## In Progress
 
-- Front end minor issues ironing
-- Front end testing
+- N/A
 
 ## Done
-- See closed issues log
+- # See closed issues log
