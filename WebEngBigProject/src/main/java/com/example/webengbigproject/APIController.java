@@ -113,7 +113,6 @@ public class APIController
             int openTDBDistr, dataMuseDistr, openMovieDistr = 0;
 
             if (distr < 1) {
-                // DO SOMETHING
                 // Get one open trivia response and make the others blank
                 OpenTriviaDBResponse openTDBResponse = getOpenTDBQuestion(count, "medium", "multiple");
                 DataMuseResponse[] emptyDataMuseResponseArray = {};
@@ -167,7 +166,6 @@ public class APIController
         try
         {
             storageHandler.updateScores(mode, user, score);
-            //return (ArrayList<ScoreResponseJSON>) storageHandler.readScores();
             return ResponseEntity.ok("Submission Successful");
         }
         catch (Exception e)
@@ -210,7 +208,6 @@ public class APIController
 
     @GetMapping("/apiusage")
     public String apiUsage()//,
-    // @RequestParam(value = "amount", required = false, defaultValue = "10") Integer amount)
     {
         return "<div id = \"main\">" +
                 "<b><i>Following are the API usage examples:" +
@@ -227,7 +224,6 @@ public class APIController
                 "document.body.style.backgroundColor = \"black\";" +
                 "</script>";
     }
-
 
 
 }

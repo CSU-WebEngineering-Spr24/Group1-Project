@@ -1,11 +1,7 @@
 package com.example.webengbigproject.Utilities;
 
-import com.example.webengbigproject.DataMuse.DataMuseResponse;
-import com.example.webengbigproject.DataMuse.DataMuseWordDefinitions;
-import com.example.webengbigproject.OpenTDB.OpenTDBService;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBQuestion;
 import com.example.webengbigproject.OpenTDB.OpenTriviaDBResponse;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Random;

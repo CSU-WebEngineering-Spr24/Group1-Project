@@ -72,7 +72,6 @@ public class DataMuseService
 
         String url = BASE_URL + CHAR_START + randomCharacter + CHAR_END + AMOUNT + amount + DEFINITIONS_ENABLED;
         ArrayList<DataMuseResponse> returnList = new ArrayList<DataMuseResponse>();
-        //returnList.add(restTemplate.getForObject(url, DataMuseResponse.class));
         return restTemplate.getForObject(url, DataMuseResponse[].class);
     }
 

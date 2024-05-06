@@ -1,12 +1,12 @@
 package com.example.webengbigproject.OMDB;
-
+/**
+ * This class will fetch omdb data and store it into omdb response json
+ * @author Himanshu Bohra
+ */
 import com.example.webengbigproject.DataMuse.DataMuseResponse;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Service
 public class OMDBService {

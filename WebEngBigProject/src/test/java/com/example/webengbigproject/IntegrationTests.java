@@ -32,8 +32,8 @@ public class IntegrationTests
     @Test
     public void testSubmitApiEndpoint() throws Exception
     {
-        // Arrange: No need for mocking; we're testing the actual endpoint
-        // Act: Perform an API request
+        // we will test it directly to see if submission successful string was obtained or not
+        // if not, then we will fail the test: isOk() false or Submission Successful string not there.
         mockMvc.perform(MockMvcRequestBuilders.get("/submit"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string("Submission Successful"));
@@ -43,8 +43,8 @@ public class IntegrationTests
     @Test
     public void testQuestionsApiEndpoint() throws Exception
     {
-        // Arrange: No need for mocking; we're testing the actual endpoint
-        // Act: Perform an API request
+
+        // Mvc result can hold the result from the api call
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/questions?amount=5")).andReturn();
 
         MockHttpServletResponse response = result.getResponse();

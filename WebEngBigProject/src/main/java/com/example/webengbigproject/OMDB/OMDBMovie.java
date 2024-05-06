@@ -2,8 +2,6 @@ package com.example.webengbigproject.OMDB;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.ArrayList;
-
 /**
  @author Himanshu Bohra
  This class represents the json object for OMDB API movie.

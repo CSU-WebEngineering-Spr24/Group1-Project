@@ -27,6 +27,7 @@ class WebEngBigProjectApplicationTests
     @Test
     void homeControllerTest() throws Exception
     {
+        // Simple check to see the home controller is there for the bundle.js
         assertThat(controller).isNotNull();
     }
     @Test

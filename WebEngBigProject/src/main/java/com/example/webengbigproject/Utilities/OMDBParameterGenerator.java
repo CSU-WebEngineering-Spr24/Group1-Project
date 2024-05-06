@@ -1,5 +1,9 @@
 package com.example.webengbigproject.Utilities;
-
+/**
+ * Helper utility class which generates year from a range and picks from given keywords.
+ * Primarily for omdb queries
+ * @author Himanshu Bohra
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
